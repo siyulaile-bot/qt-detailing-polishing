@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>QT Detailing Polishing — Mobile Car Wash &amp; Detailing (House Call)</title>
+<meta name="description" content="QT Detailing Polishing — house call car wash, detail wash, car seat steam cleaning and more. We come to you. WhatsApp 013-506 2711." />
+<meta property="og:title" content="QT Detailing Polishing — House Call Car Detailing" />
+<meta property="og:description" content="We provide house call service for basic car wash, detail wash and more.. Hahhh...Baru laa kemahh.." />
+<meta name="theme-color" content="#0b0d17" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --bg:#0b0d17;
+    --bg-2:#101426;
+    --surface:#151a2d;
+    --surface-2:#1c2238;
+    --line:rgba(255,255,255,.10);
+    --ink:#f3f5ff;
+    --muted:#a2abcd;
+    --lime:#c9f34a;
+    --cyan:#4de8ff;
+    --pink:#ff64c8;
+    --gold:#ffd166;
+    --wa:#25d366;
+    --radius:22px;
+    --shadow:0 18px 40px rgba(0,0,0,.45);
+    --maxw:1120px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4,.display{font-family:"Fredoka","Nunito",sans-serif;font-weight:600;line-height:1.12;margin:0;}
+  p{margin:0;}
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  section{scroll-margin-top:86px;}
+
+  .wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:20px;}
+
+  /* ============ BACKDROP GLOW ============ */
+  .glow{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+  .glow::before,.glow::after{
+    content:"";position:absolute;width:520px;height:520px;border-radius:50%;filter:blur(120px);opacity:.30;
+  }
+  .glow::before{background:var(--cyan);top:-180px;left:-160px;animation:float 14s ease-in-out infinite;}
+  .glow::after{background:var(--pink);bottom:-220px;right:-180px;animation:float 18s ease-in-out infinite reverse;}
+  @keyframes float{50%{transform:translate3d(40px,50px,0) scale(1.08);}}
+
+  /* ============ HEADER ============ */
+  header.site{
+    position:sticky;top:0;z-index:60;
+    backdrop-filter:blur(14px);
+    background:rgba(11,13,23,.78);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;gap:18px;height:70px;}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto;}
+  .brand b{font-family:"Fredoka";font-weight:600;font-size:19px;letter-spacing:.2px;}
+  .brand small{display:block;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);font-weight:700;}
+  .nav-links{display:flex;gap:6px;}
+  .nav-links a{
+    text-decoration:none;font-weight:700;font-size:15px;color:var(--muted);
+    padding:8px 14px;border-radius:999px;transition:.2s;
+  }
+  .nav-links a:hover{color:var(--ink);background:rgba(255,255,255,.07);}
+
+  /* ============ BUTTONS ============ */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    font-family:"Fredoka";font-weight:600;font-size:16px;text-decoration:none;
+    padding:13px 22px;border-radius:999px;border:0;cursor:pointer;
+    transition:transform .15s ease, box-shadow .2s ease, filter .2s;
+    white-space:nowrap;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-wa{
+    background:var(--wa);color:#04220f;
+    box-shadow:0 8px 26px rgba(37,211,102,.38), 0 0 0 0 rgba(37,211,102,.5);
+    animation:pulse 2.6s infinite;
+  }
+  .btn-wa:hover{filter:brightness(1.07);box-shadow:0 12px 34px rgba(37,211,102,.5);}
+  @keyframes pulse{
+    0%{box-shadow:0 8px 26px rgba(37,211,102,.38),0 0 0 0 rgba(37,211,102,.45);}
+    70%{box-shadow:0 8px 26px rgba(37,211,102,.38),0 0 0 16px rgba(37,211,102,0);}
+    100%{box-shadow:0 8px 26px rgba(37,211,102,.38),0 0 0 0 rgba(37,211,102,0);}
+  }
+  .btn-ghost{
+    background:rgba(255,255,255,.06);color:var(--ink);
+    border:1.5px solid rgba(255,255,255,.18);
+  }
+  .btn-ghost:hover{background:rgba(255,255,255,.12);}
+  .btn-lg{padding:16px 30px;font-size:18px;}
+  .btn-sm{padding:9px 16px;font-size:14px;}
+
+  /* ============ HERO ============ */
+  .hero{position:relative;z-index:1;padding:64px 0 40px;}
+  .hero-inner{display:grid;grid-template-columns:1.35fr .65fr;gap:40px;align-items:center;}
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;
+    color:var(--lime);background:rgba(201,243,74,.10);
+    border:1px solid rgba(201,243,74,.35);
+    padding:7px 15px;border-radius:999px;
+  }
+  .hero h1{
+    font-size:clamp(40px,7vw,74px);margin:20px 0 0;letter-spacing:-1px;
+    text-shadow:0 0 34px rgba(77,232,255,.28);
+  }
+  .hero h1 .neon{
+    color:var(--lime);
+    text-shadow:0 0 8px rgba(201,243,74,.8),0 0 30px rgba(201,243,74,.45);
+  }
+  .hero .tagline{font-size:clamp(18px,2.4vw,23px);color:var(--muted);margin-top:16px;max-width:36ch;font-weight:600;}
+  .shout{
+    display:inline-block;margin-top:22px;
+    font-family:"Fredoka";font-size:clamp(17px,2.4vw,22px);
+    color:var(--gold);
+    background:rgba(255,209,102,.09);border:1.5px dashed rgba(255,209,102,.55);
+    padding:9px 18px;border-radius:16px;transform:rotate(-1.4deg);
+  }
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px;}
+  .hero-facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;}
+  .fact{
+    font-size:13.5px;font-weight:800;color:var(--muted);
+    background:rgba(255,255,255,.05);border:1px solid var(--line);
+    padding:7px 13px;border-radius:999px;
+  }
+  .fact b{color:var(--cyan);}
+
+  /* hero brand image */
+  .hero-art{position:relative;display:grid;place-items:center;}
+  .hero-art img{
+    width:100%;max-width:360px;height:auto;display:block;
+    border-radius:26px;
+    border:1.5px solid rgba(77,232,255,.4);
+    box-shadow:var(--shadow),0 0 60px rgba(77,232,255,.16);
+    transform:rotate(-2deg);
+    transition:transform .2s ease;
+  }
+  .hero-art img:hover{transform:rotate(0deg) translateY(-4px) scale(1.02);}
+
+  /* ============ SECTION HEADS ============ */
+  .section{position:relative;z-index:1;padding:56px 0;}
+  .section.alt{background:linear-gradient(180deg,transparent,rgba(255,255,255,.035),transparent);}
+  .sec-head{text-align:center;max-width:720px;margin:0 auto 34px;}
+  .eyebrow{
+    display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:2.4px;
+    text-transform:uppercase;color:var(--cyan);margin-bottom:12px;
+  }
+  .sec-head h2{font-size:clamp(30px,5vw,46px);letter-spacing:-.5px;}
+  .sec-head p{color:var(--muted);margin-top:12px;font-weight:600;}
+
+  /* ============ PRICE CARDS ============ */
+  .cards{display:grid;gap:22px;}
+  .cards-3{grid-template-columns:repeat(3,1fr);}
+  .cards-2{grid-template-columns:repeat(2,1fr);max-width:900px;margin-inline:auto;}
+
+  .card{
+    position:relative;background:var(--surface);
+    border:1.5px solid var(--line);border-radius:var(--radius);
+    padding:26px 22px 24px;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;
+    transition:transform .2s ease, border-color .2s ease;
+  }
+  .card:hover{transform:translateY(-6px);border-color:rgba(77,232,255,.5);}
+  .card--hot{
+    border-color:rgba(201,243,74,.6);
+    background:linear-gradient(180deg,rgba(201,243,74,.07),transparent 38%),var(--surface);
+    box-shadow:var(--shadow),0 0 44px rgba(201,243,74,.14);
+  }
+  .ribbon{
+    position:absolute;top:-14px;left:50%;transform:translateX(-50%) rotate(-1.5deg);
+    background:var(--lime);color:#15200a;font-family:"Fredoka";font-size:13px;
+    padding:6px 15px;border-radius:999px;border:2px solid #15200a;white-space:nowrap;
+    box-shadow:0 6px 16px rgba(0,0,0,.4);
+  }
+  .card-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+  .card h3{font-size:26px;}
+  .card--hot h3{color:var(--lime);}
+  .dur{
+    font-size:12.5px;font-weight:800;color:var(--cyan);
+    background:rgba(77,232,255,.10);border:1px solid rgba(77,232,255,.35);
+    padding:5px 11px;border-radius:999px;white-space:nowrap;
+  }
+  .card-note{font-size:13.5px;color:var(--muted);font-weight:600;margin-top:6px;}
+
+  .prices{list-style:none;margin:20px 0 4px;padding:0;display:grid;gap:9px;}
+  .prices li{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    background:var(--surface-2);border:1px solid var(--line);
+    border-radius:14px;padding:11px 14px;
+  }
+  .prices .size{font-weight:800;font-size:15px;color:var(--muted);letter-spacing:.3px;}
+  .prices .amount{font-family:"Fredoka";font-size:24px;font-weight:600;color:var(--ink);}
+  .prices s{
+    color:#9aa3c0;font-size:15px;font-weight:700;margin-right:8px;
+    text-decoration-color:var(--pink);text-decoration-thickness:2px;
+  }
+  .prices .now{color:var(--lime);text-shadow:0 0 16px rgba(201,243,74,.45);}
+  .prices .amount .off{
+    display:inline-block;font-family:"Nunito";font-size:11px;font-weight:800;
+    background:var(--pink);color:#2a0417;border-radius:6px;padding:2px 6px;
+    margin-left:8px;vertical-align:middle;letter-spacing:.5px;
+  }
+  .card h4{
+    font-family:"Nunito";font-size:12.5px;font-weight:800;letter-spacing:2px;
+    text-transform:uppercase;color:var(--muted);margin:20px 0 10px;
+  }
+  .feat{list-style:none;margin:0;padding:0;display:grid;gap:9px;}
+  .feat li{display:flex;gap:10px;font-size:14.7px;font-weight:600;color:#d7dcf2;line-height:1.45;}
+  .feat li::before{
+    content:"✓";flex:none;width:20px;height:20px;margin-top:2px;
+    display:grid;place-items:center;border-radius:6px;
+    background:rgba(77,232,255,.15);color:var(--cyan);font-size:12px;font-weight:900;
+  }
+  .feat li.plus{color:var(--gold);font-weight:800;}
+  .feat li.plus::before{content:"＋";background:rgba(255,209,102,.16);color:var(--gold);}
+  .feat li.free::after{
+    content:"FREE";font-size:10.5px;font-weight:900;letter-spacing:1px;
+    background:var(--pink);color:#2a0417;border-radius:6px;padding:2px 7px;
+    margin-left:6px;align-self:center;white-space:nowrap;
+  }
+  .card .btn{margin-top:22px;width:100%;}
+
+  /* ============ STEAM CALLOUT ============ */
+  .callout{
+    position:relative;max-width:640px;margin:34px auto 0;
+    background:linear-gradient(135deg,rgba(77,232,255,.12),rgba(255,100,200,.10));
+    border:2px dashed rgba(77,232,255,.5);border-radius:24px;
+    padding:20px 24px 20px 74px;
+    font-weight:700;font-size:16.5px;
+  }
+  .callout .steam-ic{
+    position:absolute;left:20px;top:50%;transform:translateY(-50%);
+    width:40px;height:40px;border-radius:50%;display:grid;place-items:center;
+    background:var(--cyan);color:#04202a;font-size:20px;
+    box-shadow:0 0 22px rgba(77,232,255,.5);
+  }
+  .callout b{color:var(--cyan);}
+  .callout small{display:block;color:var(--muted);font-weight:700;font-size:13.5px;margin-top:4px;}
+
+  /* ============ ADD-ONS ============ */
+  .addons{
+    max-width:900px;margin:26px auto 0;background:var(--surface);
+    border:1.5px solid var(--line);border-radius:var(--radius);padding:22px;
+  }
+  .addons h4{
+    font-family:"Fredoka";font-size:19px;font-weight:600;margin-bottom:4px;
+    display:flex;align-items:center;gap:9px;
+  }
+  .addons .sub{font-size:13.5px;color:var(--muted);font-weight:700;margin-bottom:16px;}
+  .chip-grid{display:flex;flex-wrap:wrap;gap:10px;}
+  .chip{
+    display:flex;align-items:center;gap:9px;
+    background:var(--surface-2);border:1px solid var(--line);
+    border-radius:999px;padding:9px 15px;font-size:14.5px;font-weight:700;
+  }
+  .chip b{font-family:"Fredoka";color:var(--lime);font-weight:600;font-size:15.5px;}
+  .chip .dot{width:7px;height:7px;border-radius:50%;background:var(--pink);flex:none;}
+
+  /* ============ CONTACT / SOCIAL ============ */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:stretch;}
+  .panel{
+    background:var(--surface);border:1.5px solid var(--line);
+    border-radius:var(--radius);padding:30px 26px;box-shadow:var(--shadow);
+  }
+  .panel h3{font-size:27px;margin-bottom:8px;}
+  .panel p{color:var(--muted);font-weight:600;font-size:15.5px;}
+  .socials{display:grid;gap:12px;margin-top:22px;}
+  .social{
+    display:flex;align-items:center;gap:14px;text-decoration:none;
+    background:var(--surface-2);border:1.5px solid var(--line);
+    border-radius:16px;padding:14px 16px;transition:.18s;
+  }
+  .social:hover{transform:translateX(5px);border-color:rgba(255,255,255,.35);background:#232a45;}
+  .social .ic{
+    width:42px;height:42px;border-radius:13px;flex:none;display:grid;place-items:center;
+    background:rgba(255,255,255,.08);
+  }
+  .social .ic svg{width:22px;height:22px;fill:currentColor;}
+  .social .who{display:flex;flex-direction:column;line-height:1.25;}
+  .social .who b{font-family:"Fredoka";font-weight:600;font-size:16.5px;}
+  .social .who span{font-size:13px;color:var(--muted);font-weight:700;}
+  .social .arr{margin-left:auto;color:var(--muted);font-size:18px;}
+  .social.tt .ic{color:#ff5edb;} .social.ig .ic{color:#ff8a5c;}
+  .social.fb .ic{color:#5ea6ff;} .social.wa .ic{color:#4ade80;}
+  .panel-wa{
+    background:linear-gradient(160deg,rgba(37,211,102,.16),transparent 60%),var(--surface);
+    border-color:rgba(37,211,102,.4);
+  }
+  .wa-card{display:flex;flex-direction:column;justify-content:center;gap:16px;height:100%;}
+  .wa-big{
+    font-family:"Fredoka";font-size:clamp(24px,3vw,32px);color:#4ade80;
+    text-shadow:0 0 22px rgba(74,222,128,.45);
+  }
+
+  /* ============ FOOTER ============ */
+  footer.site{
+    position:relative;z-index:1;border-top:1px solid var(--line);
+    padding:34px 0 120px;text-align:center;background:rgba(0,0,0,.25);
+  }
+  footer .f-brand{font-family:"Fredoka";font-size:20px;}
+  footer .f-tag{color:var(--gold);font-weight:800;font-size:14.5px;margin-top:6px;}
+  footer .f-meta{color:var(--muted);font-size:13.5px;font-weight:600;margin-top:12px;}
+
+  /* ============ STICKY WHATSAPP ============ */
+  .wa-float{
+    position:fixed;right:22px;bottom:24px;z-index:80;
+    display:flex;align-items:center;gap:10px;
+    background:var(--wa);color:#04220f;text-decoration:none;
+    font-family:"Fredoka";font-weight:600;font-size:16px;
+    padding:14px 22px;border-radius:999px;
+    box-shadow:0 12px 34px rgba(37,211,102,.5);
+    animation:pulse 2.6s infinite;
+  }
+  .wa-float:hover{transform:translateY(-3px);filter:brightness(1.07);}
+  .wa-float svg{width:22px;height:22px;fill:#04220f;}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:960px){
+    .hero-inner{grid-template-columns:1fr;text-align:center;}
+    .hero .tagline{margin-inline:auto;}
+    .hero-cta,.hero-facts{justify-content:center;}
+    .hero-art{margin-top:6px;}
+    .cards-3{grid-template-columns:1fr;max-width:520px;margin-inline:auto;}
+    .contact-grid{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+  }
+  @media (max-width:760px){
+    body{padding-bottom:86px;font-size:16px;}
+    .nav .btn-wa{display:none;}
+    .section{padding:42px 0;}
+    .hero{padding-top:40px;}
+    .wa-float{
+      left:14px;right:14px;bottom:14px;justify-content:center;
+      font-size:17px;padding:16px 20px;
+    }
+    .callout{padding:64px 20px 20px;text-align:center;}
+    .callout .steam-ic{left:50%;top:20px;transform:translateX(-50%);}
+    footer.site{padding-bottom:130px;}
+  }
+  @media (max-width:420px){
+    .brand small{display:none;}
+    .prices .amount{font-size:21px;}
+  }
+</style>
+</head>
+
+<body>
+<div class="glow" aria-hidden="true"></div>
+
+<!-- ============ HEADER ============ -->
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="#top">
+      <span>
+        <b>QT Detailing Polishing</b>
+        <small>House Call Service</small>
+      </span>
+    </a>
+    <nav class="nav-links">
+      <a href="#packages">Car Wash</a>
+      <a href="#seats">Car Seats</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-wa btn-sm" href="https://wa.me/60135062711" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.95 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.53.07-.8.38-.27.3-1.05 1.02-1.05 2.5s1.07 2.9 1.22 3.1c.15.2 2.11 3.22 5.11 4.51.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.58-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35zM12.05 21.5h-.01a9.4 9.4 0 0 1-4.79-1.31l-.34-.2-3.56.93.95-3.47-.22-.36a9.38 9.38 0 0 1-1.44-5.01c0-5.18 4.22-9.4 9.41-9.4a9.34 9.34 0 0 1 6.65 2.76 9.34 9.34 0 0 1 2.75 6.65c0 5.18-4.23 9.4-9.4 9.4zM20.52 3.49A11.8 11.8 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.96L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.44-8.41z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <span class="pill">🐱 Mobile · House-Call Detailing</span>
+        <h1>QT Detailing <span class="neon">Polishing</span></h1>
+        <p class="tagline">We provide house call service for basic car wash, detail wash and more..</p>
+        <div class="shout">“Hahhh...Baru laa kemahh..” ✨</div>
+
+        <div class="hero-cta">
+          <a class="btn btn-wa btn-lg" href="https://wa.me/60135062711" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.95 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.53.07-.8.38-.27.3-1.05 1.02-1.05 2.5s1.07 2.9 1.22 3.1c.15.2 2.11 3.22 5.11 4.51.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.58-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35zM12.05 21.5h-.01a9.4 9.4 0 0 1-4.79-1.31l-.34-.2-3.56.93.95-3.47-.22-.36a9.38 9.38 0 0 1-1.44-5.01c0-5.18 4.22-9.4 9.41-9.4a9.34 9.34 0 0 1 6.65 2.76 9.34 9.34 0 0 1 2.75 6.65c0 5.18-4.23 9.4-9.4 9.4zM20.52 3.49A11.8 11.8 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.96L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.44-8.41z"/></svg>
+            WhatsApp Us Now
+          </a>
+          <a class="btn btn-ghost btn-lg" href="#packages">See Packages ↓</a>
+        </div>
+
+        <div class="hero-facts">
+          <span class="fact">📍 We come to <b>you</b></span>
+          <span class="fact">🧼 Basic · Detail · Seats</span>
+          <span class="fact">💬 Reply fast on WhatsApp</span>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <img src="BRAND%20ICON.webp" alt="QT Detailing Polishing" width="400" height="400" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRICING: CAR WASH & DETAILING ============ -->
+  <section class="section" id="packages">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Price List · Promo ON 🔥</span>
+        <h2>Car Wash &amp; Detailing Packages</h2>
+        <p>Three levels of clean — pick your budget, we bring the shine to your driveway.</p>
+      </div>
+
+      <div class="cards cards-3">
+
+        <!-- BASIC -->
+        <article class="card">
+          <div class="card-top">
+            <h3>Basic</h3>
+            <span class="dur">⏱ 2–4H</span>
+          </div>
+          <p class="card-note">The everyday fresh-up.</p>
+
+          <ul class="prices">
+            <li><span class="size">Small</span><span class="amount">RM48</span></li>
+            <li><span class="size">Medium</span><span class="amount">RM58</span></li>
+            <li><span class="size">Large</span><span class="amount">RM68</span></li>
+          </ul>
+
+          <h4>Includes</h4>
+          <ul class="feat">
+            <li>Interior Vacuuming &amp; Plastic Wipe</li>
+            <li>Exterior Wash</li>
+            <li>Water Wax</li>
+            <li>Rim Detail (with detailing brush)</li>
+            <li>Tyre Shine</li>
+          </ul>
+
+          <a class="btn btn-ghost" href="https://wa.me/60135062711" target="_blank" rel="noopener">Book Basic</a>
+        </article>
+
+        <!-- PREMIUM -->
+        <article class="card">
+          <div class="card-top">
+            <h3>Premium</h3>
+            <span class="dur">⏱ 2.5–4.5H</span>
+          </div>
+          <p class="card-note">Basic + the extra love.</p>
+
+          <ul class="prices">
+            <li><span class="size">Small</span><span class="amount"><s>RM78</s><span class="now">RM68</span><span class="off">-RM10</span></span></li>
+            <li><span class="size">Medium</span><span class="amount"><s>RM88</s><span class="now">RM78</span><span class="off">-RM10</span></span></li>
+            <li><span class="size">Large</span><span class="amount"><s>RM98</s><span class="now">RM88</span><span class="off">-RM10</span></span></li>
+          </ul>
+
+          <h4>Everything in Basic, plus</h4>
+          <ul class="feat">
+            <li class="plus">Pre Wash</li>
+            <li class="plus">Iron Removal at Rims</li>
+            <li class="plus">UV Shine Protector</li>
+            <li class="plus">Undercarriage Wash</li>
+            <li class="plus free">Air Freshener Spray</li>
+          </ul>
+
+          <a class="btn btn-ghost" href="https://wa.me/60135062711" target="_blank" rel="noopener">Book Premium</a>
+        </article>
+
+        <!-- QTD PREMIUM -->
+        <article class="card card--hot">
+          <span class="ribbon">⭐ Best Value</span>
+          <div class="card-top">
+            <h3>QTD Premium</h3>
+            <span class="dur">⏱ 4–6H</span>
+          </div>
+          <p class="card-note">The full detail, inside &amp; out.</p>
+
+          <ul class="prices">
+            <li><span class="size">Small</span><span class="amount"><s>RM283</s><span class="now">RM183</span><span class="off">-RM100</span></span></li>
+            <li><span class="size">Medium</span><span class="amount"><s>RM283</s><span class="now">RM228</span><span class="off">-RM55</span></span></li>
+            <li><span class="size">Large</span><span class="amount"><s>RM328</s><span class="now">RM273</span><span class="off">-RM55</span></span></li>
+          </ul>
+
+          <h4>Everything in Premium, plus</h4>
+          <ul class="feat">
+            <li class="plus">Interior Detail — all plastic parts &amp; door trims (detailing brush &amp; steamer)</li>
+            <li class="plus">Exterior Detailing — agitate grills, crevices &amp; emblems with detailing brush</li>
+            <li class="plus">Clay Cloth</li>
+            <li class="plus">Wax</li>
+            <li class="plus free">Nano Mist</li>
+          </ul>
+
+          <a class="btn btn-wa" href="https://wa.me/60135062711" target="_blank" rel="noopener">Book QTD Premium</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRICING: CAR SEAT CLEANING ============ -->
+  <section class="section alt" id="seats">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Price List · Steam Clean 🫧</span>
+        <h2>Car Seat Cleaning</h2>
+        <p>Seats, carpets, vents and roof — blasted with steam until it smells like new.</p>
+      </div>
+
+      <div class="cards cards-2">
+
+        <!-- ECO -->
+        <article class="card">
+          <div class="card-top">
+            <h3>Eco Package</h3>
+            <span class="dur">⏱ 3–4H</span>
+          </div>
+          <p class="card-note">Deep clean for the seats &amp; floor.</p>
+
+          <ul class="prices">
+            <li><span class="size">Mini (5-seat)</span><span class="amount">RM130</span></li>
+            <li><span class="size">Sedan (5-seat)</span><span class="amount">RM150</span></li>
+            <li><span class="size">MPV (7-seat)</span><span class="amount">RM200</span></li>
+          </ul>
+
+          <h4>Includes</h4>
+          <ul class="feat">
+            <li>Car Seat Cleaning + Steam</li>
+            <li>Aircond Vent Steam Cleaning</li>
+            <li>Vacuuming Floor &amp; Carpet</li>
+          </ul>
+
+          <a class="btn btn-ghost" href="https://wa.me/60135062711" target="_blank" rel="noopener">Book Eco</a>
+        </article>
+
+        <!-- QTS -->
+        <article class="card card--hot">
+          <span class="ribbon">✨ Full Cabin Reset</span>
+          <div class="card-top">
+            <h3>QTS Package</h3>
+            <span class="dur">⏱ 5–7H</span>
+          </div>
+          <p class="card-note">Every surface, steamed &amp; sanitised.</p>
+
+          <ul class="prices">
+            <li><span class="size">Mini (5-seat)</span><span class="amount"><s>RM355</s><span class="now">RM318</span><span class="off">-RM37</span></span></li>
+            <li><span class="size">Sedan (5-seat)</span><span class="amount"><s>RM385</s><span class="now">RM348</span><span class="off">-RM37</span></span></li>
+            <li><span class="size">MPV (7-seat)</span><span class="amount"><s>RM565</s><span class="now">RM518</span><span class="off">-RM47</span></span></li>
+          </ul>
+
+          <h4>Everything in Eco, plus</h4>
+          <ul class="feat">
+            <li class="plus">Floor Cleaning + Steam (without seat removal)</li>
+            <li class="plus">Floor Carpet Cleaning + Steamer</li>
+            <li class="plus">Roof Cleaning + Steam</li>
+            <li class="plus">Door Trim Cleaning + Steam</li>
+            <li class="plus free">Nano Mist</li>
+          </ul>
+
+          <a class="btn btn-wa" href="https://wa.me/60135062711" target="_blank" rel="noopener">Book QTS</a>
+        </article>
+      </div>
+
+      <!-- steam callout -->
+      <div class="callout">
+        <span class="steam-ic">♨️</span>
+        <b>Steam can kill germs and eliminate unpleasant odour.</b>
+        <small>Same steam treatment on seats, floor, roof and aircond vents.</small>
+      </div>
+
+      <!-- add-ons -->
+      <div class="addons">
+        <h4>🧩 Add-ons</h4>
+        <p class="sub">Available on top of the Eco Package — tap us on WhatsApp to bundle.</p>
+        <div class="chip-grid">
+          <span class="chip"><span class="dot"></span> Floor Cleaning + Steam <b>RM50+</b></span>
+          <span class="chip"><span class="dot"></span> Roof Cleaning + Steam <b>RM80+</b></span>
+          <span class="chip"><span class="dot"></span> Door Trim Cleaning + Steam <b>RM40+</b></span>
+          <span class="chip"><span class="dot"></span> Floor Carpet + Steam <b>RM40+</b></span>
+          <span class="chip"><span class="dot"></span> Nano Mist + Steam <b>RM25</b></span>
+        </div>
+        <p class="sub" style="margin-top:14px;margin-bottom:0;">Note: floor cleaning add-on is done without seat removal.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SOCIAL / CONTACT ============ -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Say Hi 👋</span>
+        <h2>Find Us / Book a Slot</h2>
+        <p>Fastest reply is on WhatsApp — or stalk our before &amp; afters on socials.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="panel">
+          <h3>Follow the shine ✨</h3>
+          <p>Transformations, promos and the occasional cat cameo.</p>
+
+          <div class="socials">
+            <a class="social tt" href="https://www.tiktok.com/@qt_detailing" target="_blank" rel="noopener">
+              <span class="ic" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .77-5.06V9.66a5.68 5.68 0 0 0-.77-.05A5.66 5.66 0 1 0 15.54 15.4V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.24-1.48z"/></svg>
+              </span>
+              <span class="who"><b>TikTok</b><span>@qt_detailing</span></span>
+              <span class="arr">→</span>
+            </a>
+
+            <a class="social ig" href="https://www.instagram.com/QTDetailingPolishing" target="_blank" rel="noopener">
+              <span class="ic" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9a3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2zm0 1.8c-3.14 0-3.51.01-4.75.07-1.15.05-1.77.24-2.18.4-.55.21-.94.47-1.35.88-.41.41-.67.8-.88 1.35-.16.41-.35 1.03-.4 2.18-.06 1.24-.07 1.61-.07 4.75s.01 3.51.07 4.75c.05 1.15.24 1.77.4 2.18.21.55.47.94.88 1.35.41.41.8.67 1.35.88.41.16 1.03.35 2.18.4 1.24.06 1.61.07 4.75.07s3.51-.01 4.75-.07c1.15-.05 1.77-.24 2.18-.4.55-.21.94-.47 1.35-.88.41-.41.67-.8.88-1.35.16-.41.35-1.03.4-2.18.06-1.24.07-1.61.07-4.75s-.01-3.51-.07-4.75c-.05-1.15-.24-1.77-.4-2.18a3.6 3.6 0 0 0-.88-1.35 3.6 3.6 0 0 0-1.35-.88c-.41-.16-1.03-.35-2.18-.4C15.51 4.01 15.14 4 12 4zm0 3.06A4.94 4.94 0 1 1 12 16.94 4.94 4.94 0 0 1 12 7.06zm0 1.8a3.14 3.14 0 1 0 0 6.28 3.14 3.14 0 0 0 0-6.28zm5.15-2.9a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3z"/></svg>
+              </span>
+              <span class="who"><b>Instagram</b><span>@QTDetailingPolishing</span></span>
+              <span class="arr">→</span>
+            </a>
+
+            <a class="social fb" href="https://www.facebook.com/QTDetailingPolishing" target="_blank" rel="noopener">
+              <span class="ic" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06C2 17.08 5.66 21.24 10.44 22v-7.02H7.9v-2.92h2.54V9.85c0-2.52 1.49-3.91 3.77-3.91 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.45 2.92h-2.33V22C18.34 21.24 22 17.08 22 12.06z"/></svg>
+              </span>
+              <span class="who"><b>Facebook</b><span>@QTDetailingPolishing</span></span>
+              <span class="arr">→</span>
+            </a>
+
+            <a class="social wa" href="https://wa.me/60135062711" target="_blank" rel="noopener">
+              <span class="ic" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.95 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.53.07-.8.38-.27.3-1.05 1.02-1.05 2.5s1.07 2.9 1.22 3.1c.15.2 2.11 3.22 5.11 4.51.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.58-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35zM12.05 21.5h-.01a9.4 9.4 0 0 1-4.79-1.31l-.34-.2-3.56.93.95-3.47-.22-.36a9.38 9.38 0 0 1-1.44-5.01c0-5.18 4.22-9.4 9.41-9.4a9.34 9.34 0 0 1 6.65 2.76 9.34 9.34 0 0 1 2.75 6.65c0 5.18-4.23 9.4-9.4 9.4zM20.52 3.49A11.8 11.8 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.96L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.44-8.41z"/></svg>
+              </span>
+              <span class="who"><b>WhatsApp</b><span>+60 13-506 2711</span></span>
+              <span class="arr">→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="panel panel-wa">
+          <div class="wa-card">
+            <span class="pill" style="color:#4ade80;background:rgba(37,211,102,.12);border-color:rgba(37,211,102,.4);">🚗 House Call Booking</span>
+            <div class="wa-big">Ready for that “Hahhh...Baru laa kemahh..” feeling?</div>
+            <p>Tell us your car model + the package you want, and we'll confirm a slot at your place.</p>
+            <a class="btn btn-wa btn-lg" href="https://wa.me/60135062711" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.95 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.53.07-.8.38-.27.3-1.05 1.02-1.05 2.5s1.07 2.9 1.22 3.1c.15.2 2.11 3.22 5.11 4.51.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.58-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35zM12.05 21.5h-.01a9.4 9.4 0 0 1-4.79-1.31l-.34-.2-3.56.93.95-3.47-.22-.36a9.38 9.38 0 0 1-1.44-5.01c0-5.18 4.22-9.4 9.41-9.4a9.34 9.34 0 0 1 6.65 2.76 9.34 9.34 0 0 1 2.75 6.65c0 5.18-4.23 9.4-9.4 9.4zM20.52 3.49A11.8 11.8 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.96L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.44-8.41z"/></svg>
+              Chat on WhatsApp
+            </a>
+            <small style="color:var(--muted);font-weight:700;">Opens WhatsApp directly · 013-506 2711</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="wrap">
+    <div class="f-brand">QT Detailing Polishing</div>
+    <div class="f-tag">“Hahhh...Baru laa kemahh..”</div>
+    <div class="f-meta">Mobile car wash · Detailing · Seat steam cleaning — we come to your house.<br />© <span id="yr">2026</span> QT Detailing Polishing. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- ============ STICKY WHATSAPP CTA ============ -->
+<a class="wa-float" href="https://wa.me/60135062711" target="_blank" rel="noopener" aria-label="WhatsApp Us — QT Detailing Polishing">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.96-.95 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.53.07-.8.38-.27.3-1.05 1.02-1.05 2.5s1.07 2.9 1.22 3.1c.15.2 2.11 3.22 5.11 4.51.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.58-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35zM12.05 21.5h-.01a9.4 9.4 0 0 1-4.79-1.31l-.34-.2-3.56.93.95-3.47-.22-.36a9.38 9.38 0 0 1-1.44-5.01c0-5.18 4.22-9.4 9.41-9.4a9.34 9.34 0 0 1 6.65 2.76 9.34 9.34 0 0 1 2.75 6.65c0 5.18-4.23 9.4-9.4 9.4zM20.52 3.49A11.8 11.8 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.96L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.44-8.41z"/></svg>
+  WhatsApp Us
+</a>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
